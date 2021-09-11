@@ -45,6 +45,7 @@ class Main extends egret.DisplayObjectContainer {
         c.graphics.endFill();
         this.addChild(c);
 
+        egret.log("A");
         //色塊(紅)
         let a: egret.Shape = new egret.Shape();
         a.graphics.beginFill(0xff0000, 1);
