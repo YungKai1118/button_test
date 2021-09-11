@@ -53,7 +53,7 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(a);
         a.x = 100;
         a.y = 100;
-        a.touchEnabled = true;
+        a.touchEnabled = true;;;;
         a.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickButton, this);
 
         //色塊(綠)
