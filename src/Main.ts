@@ -37,7 +37,7 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private onAddToStage(event: egret.Event) {
-        egret.log("AA");
+        egret.log("pr.start");
 
         let c: egret.Sprite = new egret.Sprite();
         c.graphics.beginFill(0x0, 1);
@@ -45,7 +45,6 @@ class Main extends egret.DisplayObjectContainer {
         c.graphics.endFill();
         this.addChild(c);
 
-        egret.log("A");
         //色塊(紅)
         let a: egret.Shape = new egret.Shape();
         a.graphics.beginFill(0xff0000, 1);
@@ -54,8 +53,9 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(a);
         a.x = 100;
         a.y = 100;
-        a.touchEnabled = true;;;;
+        a.touchEnabled = true;
         a.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickButton, this);
+        egret.log("AAAA");
 
         //色塊(綠)
         this.b = new egret.Shape();
@@ -71,7 +71,7 @@ class Main extends egret.DisplayObjectContainer {
 
     private onClickButton(): void {
         egret.log("click");
-        this.b.x += 50;
+        this.b.x += 10;
     }
 }
 
