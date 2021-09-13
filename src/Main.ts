@@ -55,7 +55,7 @@ class Main extends egret.DisplayObjectContainer {
         a.y = 100;
         a.touchEnabled = true;
         a.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickButton, this);
-        egret.log("AAAA");
+        egret.log('AAAA');
 
         //色塊(綠)
         this.b = new egret.Shape();
@@ -65,6 +65,32 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.b);
         this.b.x = 200;
         this.b.y = 200;
+        
+        //////////自學--------------------↓↓↓
+        let mary ={
+            name: "mary" ,
+            sayHello: function(){
+                // console.log("Hello ${this.name}")
+                console.log("Hello " + this.name);
+            }
+        }
+        
+        //印出 mary;
+        console.log(mary.name );
+        egret.log(mary.name + " (egret.log)" );
+        //使用 [] 中刮號運算子
+        const propertyNameA = "say";
+        const propertyNameB = "Hello";
+        mary[propertyNameA + propertyNameB]() ;
+        mary.sayHello();
+        //取出 function 後執行，印出 Hello Mary
+
+        mary.name = "Louise";
+        console.log(mary.name);
+        //mary.friends = ['Jane','Leda']
+
+        //////////自學--------------------↑↑↑
+
     }
 
 
@@ -73,6 +99,9 @@ class Main extends egret.DisplayObjectContainer {
         egret.log("click");
         this.b.x += 10;
     }
+    
+
+    
 }
 
 
