@@ -9,6 +9,7 @@ var game_file_list = [
 	"libs/modules/res/res.js",
 	"libs/modules/eui/eui.js",
 	"libs/modules/tween/tween.js",
+	"bin-debug/Circle.js",
 	"bin-debug/Main.js",
 	//----auto game_file_list end----
 ];

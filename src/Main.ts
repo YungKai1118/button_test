@@ -31,14 +31,30 @@ class Main extends egret.DisplayObjectContainer {
 
     private b: egret.Shape;
 
+    public ray: number = 0;
+
+    public g:egret.Sprite;
+
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
+    }
+    //call by value & call by raference 20210913
+    private test(): void {
+
+        let a: number[] = [1, 2, 3];
+        let b: number[] = a;
+        b[0] = a[2];
+        console.log(a);//15
+        console.log(b);//10
     }
 
     private onAddToStage(event: egret.Event) {
         egret.log("pr.start");
 
+        this.test();
+
+    //lesson 1 Button  20210911
         let c: egret.Sprite = new egret.Sprite();
         c.graphics.beginFill(0x0, 1);
         c.graphics.drawRect(0, 0, 500, 500);
@@ -65,32 +81,66 @@ class Main extends egret.DisplayObjectContainer {
         this.addChild(this.b);
         this.b.x = 200;
         this.b.y = 200;
-        
-        //////////自學--------------------↓↓↓
-        let mary ={
-            name: "mary" ,
-            sayHello: function(){
+
+        //////////自學_about Object--------------------↓↓↓ 20210912
+        let mary = {
+            callback: null,
+            name: "mary",
+            sayHello: function () {
                 // console.log("Hello ${this.name}")
                 console.log("Hello " + this.name);
+                this.callback();
+            },
+            friends: ["Jane", "Leda"],
+            getfriends: function () {
+                this.friends.forEach(function (friend) {
+                    console.log(this.name + "'s friend has " + this.friend)
+                }, this)
             }
         }
         
+        // ray _ 
+        let aa: string[] = ["a", "b"];
+        let obj = {};
+        aa.forEach(function (friend) {
+            this.ray = 11;
+            egret.log("foreach times");
+        }, this);
+
+
+        this.ray = 10;
         //印出 mary;
-        console.log(mary.name );
-        egret.log(mary.name + " (egret.log)" );
+        console.log(mary.name);
+        egret.log(mary.name + " (egret.log)");
         //使用 [] 中刮號運算子
         const propertyNameA = "say";
         const propertyNameB = "Hello";
-        mary[propertyNameA + propertyNameB]() ;
+        // mary[propertyNameA + propertyNameB]();
+        mary.callback = this.aaa;
         mary.sayHello();
-        //取出 function 後執行，印出 Hello Mary
+        // 取出 function 後執行，印出 Hello Mary
 
         mary.name = "Louise";
         console.log(mary.name);
         //mary.friends = ['Jane','Leda']
 
+        mary.getfriends()
         //////////自學--------------------↑↑↑
 
+        let b:Circle = new Circle();
+        b.aaa;
+    }
+    
+    
+    private vvv: string = "Ray";
+    private vvv1: number = 456;
+    private;
+    public;
+    protected;
+    //對外權限 變數名稱 型別 值
+
+    private aaa(): void {
+        egret.log(this.name + " say hello & BBBBBBBBBBB");
     }
 
 
@@ -99,9 +149,9 @@ class Main extends egret.DisplayObjectContainer {
         egret.log("click");
         this.b.x += 10;
     }
-    
 
-    
+
+
 }
 
 
