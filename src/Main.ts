@@ -116,7 +116,7 @@ class Main extends egret.DisplayObjectContainer {
         const propertyNameA = "say";
         const propertyNameB = "Hello";
         // mary[propertyNameA + propertyNameB]();
-        mary.callback = this.aaa;
+        mary.callback = this.aaa; //mary 使用 aaa
         mary.sayHello();
         // 取出 function 後執行，印出 Hello Mary
 
