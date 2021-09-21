@@ -29,129 +29,67 @@
 
 class Main extends egret.DisplayObjectContainer {
 
-    private b: egret.Shape;
-
-    public ray: number = 0;
-
-    public g:egret.Sprite;
-
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
-    //call by value & call by raference 20210913
-    private test(): void {
 
-        let a: number[] = [1, 2, 3];
-        let b: number[] = a;
-        b[0] = a[2];
-        console.log(a);//15
-        console.log(b);//10
-    }
-
+    //1
     private onAddToStage(event: egret.Event) {
         egret.log("pr.start");
 
-        this.test();
+        this.addChild(this.sp1);
+        this.sp1.touchEnabled = true;
+        this.sp1.graphics.beginFill(0xff0000, 1);
+        this.sp1.graphics.drawRect(0, 0, 100, 100);
+        this.sp1.graphics.endFill();
 
-    //lesson 1 Button  20210911
-        let c: egret.Sprite = new egret.Sprite();
-        c.graphics.beginFill(0x0, 1);
-        c.graphics.drawRect(0, 0, 500, 500);
-        c.graphics.endFill();
-        this.addChild(c);
+        this.addChild(this.sp2);
+        this.sp2.graphics.beginFill(0x00ff00, 1);
+        this.sp2.graphics.drawRect(0, 0, 100, 100);
+        this.sp2.graphics.endFill();
+        this.sp2.x = 300;
+        this.sp2.touchEnabled = true;
 
-        //色塊(紅)
-        let a: egret.Shape = new egret.Shape();
-        a.graphics.beginFill(0xff0000, 1);
-        a.graphics.drawCircle(0, 0, 50);
-        a.graphics.endFill();
-        this.addChild(a);
-        a.x = 100;
-        a.y = 100;
-        a.touchEnabled = true;
-        a.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickButton, this);
-        egret.log('AAAA');
+        //容器
+        let a: egret.DisplayObjectContainer = new egret.DisplayObjectContainer();
 
-        //色塊(綠)
-        this.b = new egret.Shape();
-        this.b.graphics.beginFill(0x00ff00, 1);
-        this.b.graphics.drawCircle(0, 0, 50);
-        this.b.graphics.endFill();
-        this.addChild(this.b);
-        this.b.x = 200;
-        this.b.y = 200;
+        //先掛監聽器
+        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
 
-        //////////自學_about Object--------------------↓↓↓ 20210912
-        let mary = {
-            callback: null,
-            name: "mary",
-            sayHello: function () {
-                // console.log("Hello ${this.name}")
-                console.log("Hello " + this.name);
-                this.callback();
-            },
-            friends: ["Jane", "Leda"],
-            getfriends: function () {
-                this.friends.forEach(function (friend) {
-                    console.log(this.name + "'s friend has " + this.friend)
-                }, this)
-            }
-        }
-        
-        // ray _ 
-        let aa: string[] = ["a", "b"];
-        let obj = {};
-        aa.forEach(function (friend) {
-            this.ray = 11;
-            egret.log("foreach times");
-        }, this);
-
-
-        this.ray = 10;
-        //印出 mary;
-        console.log(mary.name);
-        egret.log(mary.name + " (egret.log)");
-        //使用 [] 中刮號運算子
-        const propertyNameA = "say";
-        const propertyNameB = "Hello";
-        // mary[propertyNameA + propertyNameB]();
-        mary.callback = this.aaa; //mary 使用 aaa
-        mary.sayHello();
-        // 取出 function 後執行，印出 Hello Mary
-
-        mary.name = "Louise";
-        console.log(mary.name);
-        //mary.friends = ['Jane','Leda']
-
-        mary.getfriends()
-        //////////自學--------------------↑↑↑
-
-        let b:Circle = new Circle();
-        b.aaa;
-    }
-    
-    
-    private vvv: string = "Ray";
-    private vvv1: number = 456;
-    private;
-    public;
-    protected;
-    //對外權限 變數名稱 型別 值
-
-    private aaa(): void {
-        egret.log(this.name + " say hello & BBBBBBBBBBB");
+        //開始讀取(配置檔)
+        RES.loadConfig('resource/game.res.json', 'resource/');
     }
 
+    //2
+    private onConfigComplete(event: RES.ResourceEvent): void {
 
+        RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onGroupComplete, this);
 
-    private onClickButton(): void {
-        egret.log("click");
-        this.b.x += 10;
+        //讀哪個群組
+        RES.loadGroup('preload');
     }
 
+    private myBmp1: egret.Bitmap = new egret.Bitmap();
+    private sp1: egret.Sprite = new egret.Sprite();
+    private sp2: egret.Sprite = new egret.Sprite();
 
+    //3
+    private onGroupComplete(event: RES.ResourceEvent): void {
+        egret.log("group complete");
 
+        let bmpData: egret.BitmapData = RES.getRes('bg_png');
+        this.myBmp1.bitmapData = bmpData;
+        this.myBmp1.alpha = 0.5;
+        this.sp1.addChild(this.myBmp1);
+        this.myBmp1.x = 150;
+
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.test, this);
+    }
+
+    private test(event: egret.TouchEvent): void {
+        this.sp2.addChild(this.myBmp1);
+    }
 }
 
 

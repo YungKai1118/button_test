@@ -1,0 +1,24 @@
+{
+	"groups":[
+		{
+			"keys":"bg_png,test_png",
+			"name":"preload"
+		},
+		{
+			"keys":"test_png",
+			"name":"preload2"
+		}
+	],
+	"resources":[
+		{
+			"name":"bg_png",
+			"type":"image",
+			"url":"bg.png"
+		},
+		{
+			"name":"test_png",
+			"type":"image",
+			"url":"test.png"
+		}
+	]
+}
