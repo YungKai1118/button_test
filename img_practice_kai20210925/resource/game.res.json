@@ -1,0 +1,34 @@
+{
+	"groups":[
+		{
+			"keys":"w1_png,w2_png",
+			"name":"preload_w"
+		},
+		{
+			"keys":"p1_png,p2_png",
+			"name":"preload_p"
+		}
+	],
+	"resources":[
+		{
+			"name":"p1_png",
+			"type":"image",
+			"url":"p1.png"
+		},
+		{
+			"name":"p2_png",
+			"type":"image",
+			"url":"p2.png"
+		},
+		{
+			"name":"w1_png",
+			"type":"image",
+			"url":"w1.png"
+		},
+		{
+			"name":"w2_png",
+			"type":"image",
+			"url":"w2.png"
+		}
+	]
+}
