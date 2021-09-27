@@ -28,25 +28,30 @@
 //////////////////////////////////////////////////////////////////////////////////////
 
 class Main extends egret.DisplayObjectContainer {
-    
-    private b:egret.Shape ; a:egret.Shape;
-    
-    private shp:egret.Shape
-
+  
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
+    
+    private sp1:egret.Sprite=new egret.Sprite(); 
+    private sp2:egret.Sprite=new egret.Sprite(); 
 
     private onAddToStage(event: egret.Event) {
         egret.log("start");
 
-        this.addChild(this.sp1);
-        this.addChild(this.sp2);
-
-
+        //初始化Resource资源加载库
+        //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE,this.onConfigComplete,this);
         RES.loadConfig('resource/game.res.json', 'resource/');
+
+        //將sp1和sp2放置舞台上
+        this.addChild(this.sp1);
+        this.addChild(this.sp2);
+        
+        //頻率移動sp1
+        this.stage.frameRate=30; 
+        this.addEventListener(egret.Event.ENTER_FRAME,this.move,this);
     }
 
 
@@ -58,9 +63,7 @@ class Main extends egret.DisplayObjectContainer {
     
     private bmp1:egret.Bitmap=new egret.Bitmap();
     private bmp2:egret.Bitmap=new egret.Bitmap();
-    private sp1:egret.Sprite=new egret.Sprite(); 
-    private sp2:egret.Sprite=new egret.Sprite(); 
-
+    
     private onGroupComplete(event:RES.ResourceEvent):void{
         egret.log('group complete');
         
@@ -73,6 +76,29 @@ class Main extends egret.DisplayObjectContainer {
         this.bmp2.bitmapData=w2;
         this.sp2.addChild(this.bmp2);
         this.sp2.x=200;
+        this.sp2.touchEnabled=true;
+        this.sp2.addEventListener(egret.TouchEvent.TOUCH_TAP,this.touchHandler,this);
     }
     
+    //移動
+
+    private move(event:egret.Event){
+ 
+        if (this.sp1.x<350){
+            this.sp1.x += 3;
+        }
+        else {
+            this.sp1.x=0;
+        }
+
+    }
+
+    private touchHandler(event:egret.TouchEvent){
+        egret.log("event type" +event.type);
+        this.sp1.y +=50;
+
+        if (this.sp1.y>300){  
+            this.sp2.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.touchHandler,this);
+        }
+    }
 }
