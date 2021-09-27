@@ -52,6 +52,8 @@ class Main extends egret.DisplayObjectContainer {
         //頻率移動sp1
         this.stage.frameRate=30; 
         this.addEventListener(egret.Event.ENTER_FRAME,this.move,this);
+
+
     }
 
 
