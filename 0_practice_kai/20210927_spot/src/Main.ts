@@ -15,12 +15,14 @@ class Main extends egret.DisplayObjectContainer {
 
     private onAddToStage(event: egret.Event) {
         egret.log("start AAA");
-        
+        // egret.log("x="+this.x);
+        // egret.log(this.stage.stageWidth);
+
         var stageW:number=this.stage.stageWidth;
         var stageH:number=this.stage.stageHeight;
 
         let bg= new egret.Shape();
-        bg.graphics.beginFill(0xffffcc);
+        bg.graphics.beginFill(0xffffff);
         //背景，設定大小為應用窗大小
         bg.graphics.drawRect(0,0,stageW,stageH);
         bg.graphics.endFill();
@@ -34,7 +36,7 @@ class Main extends egret.DisplayObjectContainer {
         this.textTimer= new egret.TextField();
         this.textTimer.textColor=0xffffff;
         this.textTimer.y=620;
-        this.textCount.text="倒時器";
+        this.textCount.text="倒數計時 : ";
 
         this.textDes=new egret.TextField();
         this.textDes.text="點擊第一個顏色開始";
@@ -60,7 +62,7 @@ class Main extends egret.DisplayObjectContainer {
         this.timer.addEventListener(egret.TimerEvent.TIMER,this.onTimer,this);
         this.timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE,this.onTimerComplete,this);
                 
-        //初始化4個圓
+        //初始化4*4個圓
         var radius:number = 50;
         for (let i:number = 0; i<4 ;i++)
             for (let t:number = 0; t<4 ;t++)
@@ -87,12 +89,12 @@ class Main extends egret.DisplayObjectContainer {
     }
 
     private onTimer(e:egret.TimerEvent):void{
-        this.textTimer.text="倒計時:"+(this.timer.repeatCount-this.timer.currentCount);
+        this.textTimer.text="倒數計時 : "+(this.timer.repeatCount-this.timer.currentCount);
     }  
 
     private onTimerComplete(e:egret.TimerEvent):void{
         this.textDes.text="累了嗎? 再接再厲"
-        this.textDes.removeEventListener(Circle.Event_Click,this.onClickCircle,this)
+        this.removeEventListener(Circle.Event_Click,this.onClickCircle,this);
     }
 
 }
@@ -107,8 +109,6 @@ class Circle extends egret.Sprite {
         this.init(cx,cy,cr);
         
     }
-
-
 
     private shape:egret.Shape;
     private shapex:number;
@@ -125,7 +125,9 @@ class Circle extends egret.Sprite {
         39321,16763955];
     //隨機選色
     private randomColor():number{
-        //從list隨機選出一組顏色
+        //// 從list隨機選出一組顏色
+        // egret.log(Math.random());
+        // egret.log(Math.round(Math.random()*this.colorList.length));
         return this.colorList[Math.round(Math.random()*this.colorList.length)];
     }
     //init 設定   
@@ -141,17 +143,24 @@ class Circle extends egret.Sprite {
         //父類中心點
         this.shape.x=-cr;
         this.shape.y=-cr;
-        
+        // egret.log(this.shape.x=-cr);
+
         this.shapex=cx;
+        // egret.log(this.shapex=cx);
         this.shapey=cy;
+        // egret.log(this.shapey=cy);
         this.shaper=cr;
+        // egret.log(this.shaper=cr);
 
         this.touchEnabled=true;
         //偵聽使用者的移動和觸摸
         this.addEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this,false);
         this.addChild(this.shape);
         this.x=cx;
+        egret.log("this.x="+this.x);
         this.y=cy;
+        egret.log("this.y="+this.y);
+
     }
     
     private onTouch (e:egret.TouchEvent):void{
@@ -174,7 +183,7 @@ class Circle extends egret.Sprite {
         var tempx:number;
         var tempy:number;
         var tempr:number;
-
+    
         var g:number=0;
         for(let i:number=0;i<2;i++)
             for(let t:number=0;t<2;t++)
