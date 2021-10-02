@@ -175,7 +175,7 @@ class Main extends egret.DisplayObjectContainer {
     private tempn1: number;
     private random1(): number {
 
-        this.tempn1 = Math.round(Math.random() * 9);
+        this.tempn1 = Math.round(Math.random() * 8)+1;
         egret.log(this.tempn1);
         return this.tempn1;
     }
