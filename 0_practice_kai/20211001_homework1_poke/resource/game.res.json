@@ -43,12 +43,12 @@
 		{
 			"name":"p5_png",
 			"type":"image",
-			"url":""
+			"url":"p5.png"
 		},
 		{
 			"name":"p6_png",
 			"type":"image",
-			"url":""
+			"url":"p6.png"
 		}
 	]
 }

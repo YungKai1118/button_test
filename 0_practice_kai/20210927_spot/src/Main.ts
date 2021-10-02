@@ -172,7 +172,7 @@ class Circle extends egret.Sprite {
         var tween:egret.Tween=egret.Tween.get(this);
         tween.to( { alpha : 0.1}, 500, egret.Ease.sineOut);
         tween.call(function(){
-            this.visible=!1;
+            this.visible=false;
             par.removeEventListener(egret.TouchEvent.TOUCH_TAP,this.onTouch,this);    
             }
             ,this);
