@@ -10,7 +10,6 @@ var game_file_list = [
 	"libs/modules/eui/eui.js",
 	"libs/modules/greensock/greensock.js",
 	"bin-debug/Main.js",
-	"bin-debug/Main_2.js",
 	//----auto game_file_list end----
 ];
 

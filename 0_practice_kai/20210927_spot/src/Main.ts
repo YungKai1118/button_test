@@ -168,7 +168,7 @@ class Circle extends egret.Sprite {
         var par = this.parent;
         par.dispatchEventWith(Circle.Event_Click,false,this.color);
         //防止多次點擊, Tween 創建動畫緩動
-        this.touchEnabled=!1;
+        this.touchEnabled=false;
         var tween:egret.Tween=egret.Tween.get(this);
         tween.to( { alpha : 0.1}, 500, egret.Ease.sineOut);
         tween.call(function(){
