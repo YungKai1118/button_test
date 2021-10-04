@@ -9,6 +9,7 @@ var game_file_list = [
 	"libs/modules/res/res.js",
 	"libs/modules/eui/eui.js",
 	"libs/modules/greensock/greensock.js",
+	"bin-debug/KaiSprite.js",
 	"bin-debug/Main.js",
 	//----auto game_file_list end----
 ];
