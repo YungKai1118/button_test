@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GameSceneSkin" width="500" height="500" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<w:Config id="17c50ab9f47" anchorOffsetX="0" x="-96" y="0"/>
+	<e:Rect width="100%" height="100%" fillColor="0xbcc4c3" strokeColor="0x000000" locked="true" visible="false"/>
+	<e:Group width="100%" height="100%" verticalCenter="0" scaleY="1" x="0">
+		<e:Image id="item_0" x="12" y="1" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_1" x="22" y="11" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_2" x="32" y="21" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_3" x="42" y="31" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_4" x="52" y="41" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_5" x="62" y="51" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_6" x="72" y="61" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_7" x="82" y="71" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:Image id="item_8" x="92" y="81" scaleX="1" scaleY="1" source="p5_png"/>
+		<e:layout>
+			<e:TileLayout orientation="rows"/>
+		</e:layout>
+	</e:Group>
+</e:Skin>

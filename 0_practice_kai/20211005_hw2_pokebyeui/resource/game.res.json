@@ -1,7 +1,7 @@
 {
 	"groups":[
 		{
-			"keys":"w1_png,w2_png,w3_png,w4_png,aaa_png",
+			"keys":"w1_png,w2_png,w3_png,w4_png",
 			"name":"preload_w"
 		},
 		{
@@ -49,11 +49,6 @@
 			"name":"p6_png",
 			"type":"image",
 			"url":"p6.png"
-		},
-		{
-			"name":"aaa_png",
-			"type":"image",
-			"url":"aaa.png"
 		}
 	]
 }

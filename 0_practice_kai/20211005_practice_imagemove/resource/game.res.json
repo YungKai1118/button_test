@@ -1,11 +1,11 @@
 {
 	"groups":[
 		{
-			"keys":"w1_png,w2_png,w3_png,w4_png,aaa_png",
+			"keys":"w1_png,w2_png,w3_png,w4_png",
 			"name":"preload_w"
 		},
 		{
-			"keys":"p1_png,p2_png,p5_png,p6_png",
+			"keys":"p1_png,p2_png,p3_png,p4_png",
 			"name":"preload_p"
 		}
 	],
@@ -41,19 +41,14 @@
 			"url":"w4.png"
 		},
 		{
-			"name":"p5_png",
+			"name":"p3_png",
 			"type":"image",
-			"url":"p5.png"
+			"url":"p3.png"
 		},
 		{
-			"name":"p6_png",
+			"name":"p4_png",
 			"type":"image",
-			"url":"p6.png"
-		},
-		{
-			"name":"aaa_png",
-			"type":"image",
-			"url":"aaa.png"
+			"url":"p4.png"
 		}
 	]
 }

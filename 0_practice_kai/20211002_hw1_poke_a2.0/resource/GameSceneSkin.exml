@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GameSceneSkin" width="500" height="500" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="100%" height="100%" fillColor="0x004aff"/>
+	<e:Group width="100%" height="100%">
+		<e:Image id="item_0" x="12" y="12" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_1" x="22" y="22" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_2" x="32" y="32" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_3" x="42" y="42" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_4" x="52" y="52" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_5" x="62" y="62" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_6" x="72" y="72" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_7" x="82" y="82" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:Image id="item_8" x="92" y="92" source="p6_png" scaleX="1" scaleY="1"/>
+		<e:layout>
+			<e:TileLayout orientation="columns"/>
+		</e:layout>
+	</e:Group>
+	<e:Label text="Labelasfasf" x="0" y="434"/>
+</e:Skin>
