@@ -52,7 +52,6 @@ class Main extends egret.DisplayObjectContainer {
         gameScene.skinName = "GameSceneSkin";
         this.addChild(gameScene);
 
-        return;
     }
 }
 

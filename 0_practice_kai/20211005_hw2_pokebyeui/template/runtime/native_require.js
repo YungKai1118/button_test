@@ -10,8 +10,8 @@ var game_file_list = [
 	"libs/modules/eui/eui.js",
 	"libs/modules/greensock/greensock.js",
 	"bin-debug/AssetAdapter.js",
+	"bin-debug/euiImage_getinf.js",
 	"bin-debug/GameScene.js",
-	"bin-debug/KaiSprite.js",
 	"bin-debug/Main.js",
 	"bin-debug/ThemeAdapter.js",
 	//----auto game_file_list end----
