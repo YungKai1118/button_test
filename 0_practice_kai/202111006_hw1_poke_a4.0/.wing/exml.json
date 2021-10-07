@@ -1,0 +1,16 @@
+{
+  "global": {
+    "gridColor": 8421504,
+    "gridEnabled": false,
+    "gridSize": 20,
+    "globalAutoLayerMarkEnable": true
+  },
+  "17c50ab9f47": {
+    "guideLinesEnabled": false
+  },
+  "17c54c3e9c7": {
+    "path": "componet_test.ts",
+    "class": "componet_test",
+    "parentPath": ""
+  }
+}

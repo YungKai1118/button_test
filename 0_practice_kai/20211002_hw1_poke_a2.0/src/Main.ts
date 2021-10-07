@@ -71,11 +71,11 @@ class Main extends egret.DisplayObjectContainer {
     private bmpt: egret.Bitmap[] = [];
 
     private init() {
-        let gameScene: GameScene = new GameScene();
-        gameScene.skinName = "GameSceneSkin";
-        this.addChild(gameScene);
+        // let gameScene: GameScene = new GameScene();
+        // gameScene.skinName = "GameSceneSkin";
+        // this.addChild(gameScene);
 
-        return;
+        // return;
         
         let s: egret.Shape = new egret.Shape();
         s.graphics.beginFill(0x0, 1);

@@ -8,10 +8,12 @@ var game_file_list = [
 	"libs/modules/game/game.native.js",
 	"libs/modules/res/res.js",
 	"libs/modules/eui/eui.js",
-	"libs/modules/tween/tween.js",
-	"bin-debug/Car.js",
-	"bin-debug/Car2.js",
+	"libs/modules/greensock/greensock.js",
+	"bin-debug/AssetAdapter.js",
+	"bin-debug/GameScene.js",
 	"bin-debug/Main.js",
+	"bin-debug/MyComponent.js",
+	"bin-debug/ThemeAdapter.js",
 	//----auto game_file_list end----
 ];
 
@@ -46,9 +48,9 @@ egret_native.egretStart = function () {
         //----auto option start----
 		entryClassName: "Main",
 		frameRate: 30,
-		scaleMode: "showAll",
-		contentWidth: 640,
-		contentHeight: 1136,
+		scaleMode: "fixedWidth",
+		contentWidth: 1280,
+		contentHeight: 640,
 		showPaintRect: false,
 		showFPS: false,
 		fpsStyles: "x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9",

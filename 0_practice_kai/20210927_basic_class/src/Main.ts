@@ -1,20 +1,16 @@
 class Main extends egret.DisplayObjectContainer {
-    
+
 
     public constructor() {
         super();
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-
-        var example: ExampleEventDispatcher = new ExampleEventDispatcher();
-        example.dispatchEventWith("complete");
-
 
 
     }
 
     private onAddToStage(event: egret.Event) {
         egret.log("start AAA");
- 
+
         const redCar = new Car('紅色');
 
         console.log(redCar.getDescription()); // 我是車子 - 紅色
@@ -24,59 +20,56 @@ class Main extends egret.DisplayObjectContainer {
         // 因為 brakes 是私有的，看不到裡面的值
         // console.log(redCar.brakes);
 
-        const greenCar = new CarII('綠色');
+        const greenCar = new Car2('綠色');
 
         console.log(greenCar.getDescription()); // 我是車子 - 綠色 第二代強化版
         console.log(greenCar.triggerBrakes()); // 用了商業機密的煞車方式 的無敵改良版
+
+        const newVersion = new VersionClass('紅色的', 2);
+        console.log(newVersion);
+
+
+        // ABOUT protected
+        const patentInstance = new ParentClass();
+        console.log(patentInstance);
+        // patentInstance.genealogy; // 會錯誤
+        const sonInstance = new SonClass();
+        sonInstance.getGenealogy(); // 正確讀取
+        console.log(sonInstance);
+        // sonInstance.genealogy; // 仍舊會出錯
+
+
     }
 
 }
 
-class Car {
+class ColorClass {
+    color: string;
 
-    public descroption: string;
-    public color: string;
-    private brakes: string;
-    // public brakes: string;
-    constructor(color:string){
-        this.descroption ="我是車子"
-        this.color=color;
-        this.brakes = '商業機密的煞車方式';
+    constructor(color: string) {
+        this.color = color;
     }
-    
-    public getDescription():string{
-        // egret.log("aaa");
-        return `${this.descroption} - ${this.color}`;
-        // egret.log("bbb");
-        
-    }
-    
-    public triggerBrakes(): string {
-    if (this.brakes === '商業機密的煞車方式') {
-      return '用了商業機密的煞車方式';
-    }
-    return '沒有機密方式，沒有煞車';
-  }
 }
 
-// 第二個類別 
-class CarII extends Car {
-  public getDescription(): string {
-    return `${super.getDescription()} 第二代強化版`;
-  }
+class VersionClass extends ColorClass {
+    version: number
 
-  public triggerBrakes(): string {
-    return `${super.triggerBrakes()} 的無敵改良版`;
-  }
+    constructor(color: string, version: number) {
+        // 在這裡執行的 super 等同於父類別的 constructor
+        super(color);
+        this.version = version;
+    }
 }
 
+class ParentClass {
+    protected genealogy: string;
 
-
-class ExampleEventDispatcher extends egret.EventDispatcher{
-    public constructor(){
-        super();
+    constructor() {
+        this.genealogy = 'Only family read!';
     }
-    public dispatchEventWith(eventName:string){
-        super.dispatchEvent(new egret.Event(eventName));
-    } 
+}
+class SonClass extends ParentClass {
+    getGenealogy(): string {
+        return this.genealogy; // 不會有錯，因為在子類別可以讀取到 protected 的 property
+    }
 }

@@ -1,0 +1,12 @@
+{
+	"name": "egret",
+	"version": "3.2.3",
+	"modules": [
+		{
+			"name": "howler",
+			"description": "howler",
+			"files": ["howler.d.ts", "howler.js"],
+			"root": "src"
+		}
+	]
+}

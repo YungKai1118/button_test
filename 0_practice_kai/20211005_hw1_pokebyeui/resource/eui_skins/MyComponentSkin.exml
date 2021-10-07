@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<e:Skin class="MyComponentSkin" minHeight="50" minWidth="100" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+    <e:Image id="icon" width="100%" height="100%" scale9Grid="1,3,8,8"                           source="w1_png"/>
+</e:Skin>
