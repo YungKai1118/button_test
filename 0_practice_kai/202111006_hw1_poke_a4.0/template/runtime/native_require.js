@@ -10,6 +10,7 @@ var game_file_list = [
 	"libs/modules/eui/eui.js",
 	"libs/modules/greensock/greensock.js",
 	"bin-debug/AssetAdapter.js",
+	"bin-debug/ChangeWin.js",
 	"bin-debug/GameScene.js",
 	"bin-debug/Hole.js",
 	"bin-debug/Main.js",

@@ -3,7 +3,8 @@
     "gridColor": 8421504,
     "gridEnabled": false,
     "gridSize": 20,
-    "globalAutoLayerMarkEnable": true
+    "globalAutoLayerMarkEnable": true,
+    "globalAdsorbEnable": true
   },
   "17c50ab9f47": {
     "guideLinesEnabled": false

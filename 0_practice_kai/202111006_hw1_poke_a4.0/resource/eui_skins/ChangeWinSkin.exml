@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="ChangeWinSkin" width="400" height="140" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="220" height="50" x="105.5" anchorOffsetX="0" anchorOffsetY="0" bottom="20"/>
+	<e:EditableText id="textinput_1" width="205" height="40" text="5" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="15.5" bottom="22"/>
+	<e:Button id="button_1" label="Button" x="25" y="70" width="50" height="50" skinName="skins.ButtonSkin"/>
+	<e:Label text="遊戲前輸入中獎格數(2~10)\n完成後按下藍色按鈕" y="0" anchorOffsetX="0" width="382" anchorOffsetY="0" height="74" fontFamily="Microsoft YaHei" horizontalCenter="4" locked="true"/>
+</e:Skin>
