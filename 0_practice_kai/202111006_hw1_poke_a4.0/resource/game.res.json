@@ -5,7 +5,7 @@
 			"name":"preload_w"
 		},
 		{
-			"keys":"p1_png,p2_png,p5_png,p6_png",
+			"keys":"p1_png,p2_png,p5_png,p6_png,bet_mp3",
 			"name":"preload_p"
 		}
 	],
@@ -59,6 +59,11 @@
 			"name":"button_up_png",
 			"type":"image",
 			"url":"button_up.png"
+		},
+		{
+			"name":"bet_mp3",
+			"type":"sound",
+			"url":"bet.mp3"
 		}
 	]
 }

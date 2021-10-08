@@ -1,42 +1,50 @@
+/**
+ * 一個選項
+ */
 class Hole extends eui.Component {
-    public touch: number;
-    private image: eui.Image;
-    public nth: number;
-    public wn: number[]; //中獎位置
-    public win_check: boolean;
 
+    public static CLICK_HOLE: string = "Hole.CLICK_HOLE";
+
+    // public touch: number;
+    private image: eui.Image;
+    // public win_number: number[]; //中獎位置
+    // public win_check: boolean;
+
+    private my_index: number;
+    /**
+     * 
+     */
     public constructor() {
         super()
-        this.touch = 0;
+        // this.touch = 0;
         this.image = null;
-        this.nth = 0;
-        this.win_check = false;
+        // this.win_check = false;
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.returnTouch, this);
     }
 
-    public init(): Hole {
-        this.touch = 777;
-        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.returntouch, this);
-        return this
+    public init(index: number): void {
+        this.my_index = index;
     }
 
-    private returntouch(e: egret.TouchEvent): void {
-        this.touch = 1;
+    /**
+     * 小駝峰式命名
+     */
+    private returnTouch(e: egret.TouchEvent): void {
+        // this.touch = 1;
         // console.log('touch=' + this.touch + ` ;item number:` + this.nth);
         this.image = e.target;
+        this.dispatchEventWith(Hole.CLICK_HOLE, true, this.my_index);
 
-
-        for (let i = 0; i < this.wn.length; i++) {
-            if (this.wn[i] == this.nth) {
-                this.image.texture = RES.getRes('w4_png');
-                this.win_check = true;
-            }
-            else if (this.win_check == false) {
-                this.image.texture = RES.getRes('p6_png');
-            }
-        }
-
-
+        let sound: egret.Sound = RES.getRes('bet_mp3')
+        sound.play(0, 1);
     }
 
-
+    public setIsWin(isWin: boolean): void {
+        if (isWin) {
+            this.image.texture = RES.getRes('w4_png');
+        }
+        else {
+            this.image.texture = RES.getRes('p6_png');
+        }
+    }
 }

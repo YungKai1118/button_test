@@ -7,6 +7,8 @@ class GameScene extends eui.Component {
 	private textinput_0: eui.TextInput;
 	private button_0: eui.Button;
 
+	private win_number: number[];
+
 	public constructor() {
 		super();
 
@@ -39,26 +41,33 @@ class GameScene extends eui.Component {
 
 
 		// console.log('hole_0.tocuh =' + this.hole_0.touch + ',init yet');   //hole.touch=0代表尚未init(初始化)  ,  777代表init完畢 , 1代表點擊事件發生		
+
 		//init  戳戳樂--------------------------------------------------------------------------
 		this.hole_list = [];//每個hole的資料
-		let win_temp: number[]
-		win_temp = this.random_n();
+		this.win_number = this.random_n();
 		for (let i = 0; i < this.nn; i++) {
-			let temphole: Hole = new Hole;
-			temphole = this[`hole_${i}`].init();      //初始化，掛上touchtap listener	
+			let temphole: Hole = this[`hole_${i}`];
+			temphole.init(i);      //初始化，掛上touchtap listener	
 			this.hole_list.push(temphole);            //將物件資料存至hole_list內，以便後續維護或變更使用
 			console.log(`hole_${i} is init complete`);
-			this.hole_list[i].nth = i;                //使hole內部存取自己的編號，供內部使用
-			this.hole_list[i].wn = win_temp;          //使hole內部存取所有中獎位置，用來判斷其本身是否為中獎
+			// this.hole_list[i].win_number = win_temp;          //使hole內部存取所有中獎位置，用來判斷其本身是否為中獎
 		}
+		this.addEventListener(Hole.CLICK_HOLE, this.onClickHole, this);
 
 
 		//設定變更中獎數按鈕   方法1-------------------------------------------------------------
-		this.button_0.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changewin, this);
+		this.button_0.addEventListener(egret.TouchEvent.TOUCH_TAP, this.changeWin, this);
 
 		//使用自創component變更中獎數  方法2-----------------------------------------------------
 		// let changewin = new ChangeWin(this.ifgamestart()); //不可行，以我現在能力，CHANGE NUMBER要和按鈕監聽器在同一個地方
 
+	}
+	private isStart: boolean = false;
+	private onClickHole(e: egret.Event): void {
+		this.isStart = true;
+		let hole_index: number = e.data;
+		let isWin: boolean = this.win_number.indexOf(hole_index) != -1;
+		this.hole_list[hole_index].setIsWin(isWin);
 	}
 
 	private random_n(): number[] {
@@ -74,34 +83,18 @@ class GameScene extends eui.Component {
 		return arr1;
 	}
 
-	private changewin(): void {
-		let outf = 0; //若為1則不可更改中獎數
-		this.hole_list.forEach((v) => {   //檢查每個hole是否被點擊過
-			if (v.touch == 1) {
-				this.button_0.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.changewin, this);
-				outf = 1;
-				return;
-			}
-		}, this);
-		if (outf == 0) {
-			this.win_n = parseInt(this.textinput_0.text);
-			if (this.win_n < this.nn && this.win_n > 0) {
-				console.log('changing win numbers');
-				let win_temp: number[]
-				win_temp = this.random_n();
-				console.log(win_temp);
-				for (let i = 0; i < this.nn; i++) {
-					this.hole_list[i].wn = win_temp;               //使hole內部存取中獎位置
-				}
-			}
-			else {
-				this.textinput_0.text = '請輸入正確的數字'
-			}
-		}
-		else {
+	private changeWin(): void {
+		if (this.isStart) {
 			return;
 		}
 
-
+		this.win_n = parseInt(this.textinput_0.text);
+		if (this.win_n < this.nn && this.win_n > 0) {
+			console.log('changing win numbers');
+			this.win_number = this.random_n();
+		}
+		else {
+			this.textinput_0.text = '請輸入正確的數字'
+		}
 	}
 }
