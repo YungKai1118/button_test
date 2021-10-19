@@ -49,10 +49,11 @@ class GameScene extends eui.Component {
 			let temphole: Hole = this[`hole_${i}`];
 			temphole.init(i);      //初始化，掛上touchtap listener	
 			this.hole_list.push(temphole);            //將物件資料存至hole_list內，以便後續維護或變更使用
-			console.log(`hole_${i} is init complete`);
+			// console.log(`hole_${i} is init complete`);
 			// this.hole_list[i].win_number = win_temp;          //使hole內部存取所有中獎位置，用來判斷其本身是否為中獎
+			temphole.addEventListener(Hole.CLICK_HOLE, this.onClickHole, this);
 		}
-		this.addEventListener(Hole.CLICK_HOLE, this.onClickHole, this);
+		//this.addEventListener(Hole.CLICK_HOLE, this.onClickHole, this);
 
 
 		//設定變更中獎數按鈕   方法1-------------------------------------------------------------
@@ -60,8 +61,19 @@ class GameScene extends eui.Component {
 
 		//使用自創component變更中獎數  方法2-----------------------------------------------------
 		// let changewin = new ChangeWin(this.ifgamestart()); //不可行，以我現在能力，CHANGE NUMBER要和按鈕監聽器在同一個地方
+	// 	點col,row
+	// 	if(點到地雷){
 
+	// 	}
+	// 	else{
+			
+	// 		for (9){
+	// 			有多少地雷?
+	// 		}
+	// 	}
 	}
+
+	// private 
 	private isStart: boolean = false;
 	private onClickHole(e: egret.Event): void {
 		this.isStart = true;

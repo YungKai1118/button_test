@@ -1,0 +1,26 @@
+{
+  "autoGenerateExmlsList": true,
+  "exmls": [
+    "resource/eui_skins/ButtonSkin.exml",
+    "resource/eui_skins/ChangeWinSkin.exml",
+    "resource/eui_skins/CheckBoxSkin.exml",
+    "resource/eui_skins/HoleSkin.exml",
+    "resource/eui_skins/HScrollBarSkin.exml",
+    "resource/eui_skins/HSliderSkin.exml",
+    "resource/eui_skins/ItemRendererSkin.exml",
+    "resource/eui_skins/MinesweeperComponentSkin.exml",
+    "resource/eui_skins/MyComponentSkin.exml",
+    "resource/eui_skins/PanelSkin.exml",
+    "resource/eui_skins/ProgressBarSkin.exml",
+    "resource/eui_skins/RadioButtonSkin.exml",
+    "resource/eui_skins/ScrollerSkin.exml",
+    "resource/eui_skins/TextInputSkin.exml",
+    "resource/eui_skins/ToggleSwitchSkin.exml",
+    "resource/eui_skins/VScrollBarSkin.exml",
+    "resource/eui_skins/VSliderSkin.exml",
+    "resource/GameSceneSkin.exml"
+  ],
+  "skins": {
+    "componet_test": "resource/eui_skins/componet_test.exml"
+  }
+}

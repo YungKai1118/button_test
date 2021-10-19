@@ -19,6 +19,7 @@ class Hole extends eui.Component {
         // this.touch = 0;
         this.image = null;
         // this.win_check = false;
+        this.addEventListener("AAA", this.onAAA, this);
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.returnTouch, this);
     }
 
@@ -26,6 +27,9 @@ class Hole extends eui.Component {
         this.my_index = index;
     }
 
+    private onAAA(e: egret.Event): void {
+        egret.log("A");
+    }
     /**
      * 小駝峰式命名
      */
@@ -33,8 +37,9 @@ class Hole extends eui.Component {
         // this.touch = 1;
         // console.log('touch=' + this.touch + ` ;item number:` + this.nth);
         this.image = e.target;
-        this.dispatchEventWith(Hole.CLICK_HOLE, true, this.my_index);
-
+        this.dispatchEventWith(Hole.CLICK_HOLE, false, this.my_index);
+        // this.dispatchEventWith("AAA");
+        this.dispatchEvent(new egret.Event("AAA"));
         let sound: egret.Sound = RES.getRes('bet_mp3')
         sound.play(0, 1);
     }
@@ -46,5 +51,7 @@ class Hole extends eui.Component {
         else {
             this.image.texture = RES.getRes('p6_png');
         }
+
+
     }
 }
