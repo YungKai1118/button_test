@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="HoleSkin" width="138" height="138" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="icon" x="0" y="0" anchorOffsetX="0" anchorOffsetY="0" source="p5_png"/>
-</e:Skin>

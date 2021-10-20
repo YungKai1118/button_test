@@ -5,5 +5,5 @@
  	<e:EditableText id="textDisplay"
 	                textColor.disabled="0xff0000" width="297" height="33" size="25"  text="5" verticalCenter="0.5" x="2.5" anchorOffsetX="0" anchorOffsetY="0" textColor="0xffffff"/>
 	<e:Label id="promptDisplay"
-	                width="240" height="24" size="20" touchEnabled="false" includeIn="normalWithPrompt,disabledWithPrompt" text="開始遊戲後無效" fontFamily="Microsoft JhengHei" textColor="0xffffff" anchorOffsetX="0" verticalCenter="0" horizontalCenter="0"/>
+	                width="240" height="24" size="20" touchEnabled="false" includeIn="normalWithPrompt,disabledWithPrompt" text="" fontFamily="Microsoft JhengHei" textColor="0xffffff" anchorOffsetX="0" verticalCenter="0" horizontalCenter="0"/>
 </e:Skin>

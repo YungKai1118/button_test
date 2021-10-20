@@ -10,6 +10,7 @@ class GameScene extends eui.Component {
 
     private ShowTimeLable: eui.Label;
     private timer: egret.Timer;
+    private image: eui.Image;
 
     public constructor() {
         super();
@@ -31,8 +32,17 @@ class GameScene extends eui.Component {
             }
         }
 
+        // 觸碰的圖示效果
+
+        //test ---------------------
+        this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this)
+        // this.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this)
+        this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
+        // this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.touchReleaseOutside, this)
+        // this.addEventListener(egret.TouchEvent.TOUCH_CANCEL, this.touchCancel, this)
+
         //第一次點擊後放置地雷，第一次點擊位置不可以是地雷-----------------------------------------
-        this.addEventListener(MinesweeperComponent.ON_CLICK, this.deployMine, this, false, 2)
+        this.addEventListener(MinesweeperComponent.ON_CLICK, this.deployMine, this, false, 2)  //其實在這邊和下面開始遊戲誰先開始執行無所謂
 
         //開始遊戲
         this.addEventListener(MinesweeperComponent.ON_CLICK, this.gamePlaying, this, false, 1);   //useCapture?  是什麼? 
@@ -45,13 +55,40 @@ class GameScene extends eui.Component {
          * this.timer.start();
          * this.timer.stop();
          */
+    }
+
+    private touchBegin(e: egret.TouchEvent): void {
+        let image: eui.Image = e.target;
+        image.texture = RES.getRes("p0_png");
+        console.log("touchBegin")
+
 
     }
+    private touchMove(e: egret.TouchEvent): void {
+        let image: eui.Image = e.target;
+        image.texture = RES.getRes("p0_png");
+        console.log("touchMove")
+        // console.log(document.onmousedown)
+        console.log(ontouchmove)
+        console.log(onmousedown)
+        // console.log(image)
+    }
+    private touchReleaseOutside(e: egret.TouchEvent): void {
+        // image.texture = RES.getRes("p0_png");
+        console.log("touchReleaseOutside")
+        // console.log(image)
+    }
+    private touchEnd(e: egret.TouchEvent): void {
+        // image.texture = RES.getRes("p0_png");
+        console.log("touchEnd")
+        // console.log(image)
+    }
+
+
     /**
      * 將時間顯示至lable
      */
     private onTimer(e: egret.TimerEvent): void {
-        
         this.ShowTimeLable.text = String(this.timer.currentCount);
     }
 
@@ -78,6 +115,7 @@ class GameScene extends eui.Component {
          * cheat 打開地雷
          */
         // this.showAllMine();
+
     }
 
     /**
@@ -103,6 +141,8 @@ class GameScene extends eui.Component {
         let column = e.data[2];
 
         this.showResult(row, column);
+
+
     }
 
     private showResult(row: number, column: number): void {
@@ -112,11 +152,13 @@ class GameScene extends eui.Component {
             this.removeEventListener(MinesweeperComponent.ON_CLICK, this.gamePlaying, this);
             this.showAllMine();
             this.timer.stop();
+            return;
         }
 
         if (row > -1 && row < this.GAME_ROW && column > -1 && column < this.GAME_COLUMN && !this.mine_list[row][column].isTouch) {
-            this.mine_list[row][column].showMineNumber(mineNumber);
-            this.mine_list[row][column].isTouch = true; //顯示過圖片的元件不再進入showResult
+            let target: MinesweeperComponent = this.mine_list[row][column];
+            target.showMineNumber(mineNumber);
+            target.isTouch = true; //顯示過圖片的元件不再進入showResult
             this.countOpenComponet++;
             if (mineNumber == 0) {
                 this.showResult(row, column - 1);
@@ -134,6 +176,9 @@ class GameScene extends eui.Component {
                 this.timer.stop();
             }
         }
+        else { return; }
+
+
         //learning  有關egret.Point的使用範例
         // let pp: egret.Point = this.getPosByIndex(56);
         // pp.x;//col

@@ -261,5 +261,5 @@
 			<e:TileLayout orientation="rows" horizontalGap="1" verticalGap="1"/>
 		</e:layout>
 	</e:Group>
-	<e:Label id="ShowTimeLable" text="0" x="27" y="40"/>
+	<e:Label id="ShowTimeLable" text="0" x="25" y="35" size="34" anchorOffsetX="0" width="100"/>
 </e:Skin>
