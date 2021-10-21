@@ -34,8 +34,10 @@ class GameScene extends eui.Component {
 
         // 觸碰的圖示效果
 
+
+        // 
         //test ---------------------
-        this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this)
+        // this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this)
         // this.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this)
         this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.touchMove, this);
         // this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.touchReleaseOutside, this)
@@ -52,38 +54,66 @@ class GameScene extends eui.Component {
         this.timer.addEventListener(egret.TimerEvent.TIMER, this.onTimer, this);
         /**learning:
          * 開始和結束方式如下二
-         * this.timer.start();
-         * this.timer.stop();
          */
-    }
-
-    private touchBegin(e: egret.TouchEvent): void {
-        let image: eui.Image = e.target;
-        image.texture = RES.getRes("p0_png");
-        console.log("touchBegin")
+        // this.timer.start();
+        // this.timer.stop();
 
 
     }
+    private checkCollision(_stageX: number, _stageY: number, Mine: MinesweeperComponent): boolean {
+        let IsCollistion: boolean;
+        IsCollistion = Mine.hitTestPoint(_stageX, _stageY)
+        return IsCollistion;
+    }
+
+    // private touchBegin(e: egret.TouchEvent): void {
+    //     let image: eui.Image = e.target;
+    //     image.texture = RES.getRes("p0_png");
+    //     console.log("touchBegin")
+    // }
+
     private touchMove(e: egret.TouchEvent): void {
-        let image: eui.Image = e.target;
-        image.texture = RES.getRes("p0_png");
+        // egret.BitmapData
+        let _p0: egret.Texture = RES.getRes("p0_png");
+        let _p9: egret.Texture = RES.getRes("p9_png");
+        let IsCollistion: boolean;
+        console.log("X="+e.stageX+"  Y="+e.stageY);
+        // image.texture = RES.getRes("p0_png");
+        for (let i = 0; i < this.GAME_ROW; i++) {
+            for (let t = 0; t < this.GAME_COLUMN; t++) {
+                if (!this.mine_list[i][t].isTouch) {
+                    IsCollistion = this.checkCollision(e.stageX, e.stageY, this.mine_list[i][t]);
+                    if (IsCollistion) {
+                        this.mine_list[i][t].image.texture = _p0;
+                    }
+                    else {
+                        this.mine_list[i][t].image.texture = _p9;
+                    }
+                }
+            }
+        }
+
+        // if (!image.hitTestPoint(e.stageX, e.stageY)) {
+        //     image.texture = RES.getRes("p9_png");
+        // }
+        // console.log(image.hitTestPoint(e.stageX, e.stageY))
         console.log("touchMove")
         // console.log(document.onmousedown)
-        console.log(ontouchmove)
-        console.log(onmousedown)
-        // console.log(image)
-    }
-    private touchReleaseOutside(e: egret.TouchEvent): void {
-        // image.texture = RES.getRes("p0_png");
-        console.log("touchReleaseOutside")
-        // console.log(image)
-    }
-    private touchEnd(e: egret.TouchEvent): void {
-        // image.texture = RES.getRes("p0_png");
-        console.log("touchEnd")
+        // console.log(e.touchDown)
+        // console.log(onmousedown)
         // console.log(image)
     }
 
+    // private touchReleaseOutside(e: egret.TouchEvent): void { 
+    //     // image.texture = RES.getRes("p0_png");
+    //     console.log("touchReleaseOutside")
+    //     // console.log(image)
+    // }
+    // private touchEnd(e: egret.TouchEvent): void {
+    //     // image.texture = RES.getRes("p0_png");
+    //     console.log("touchEnd")
+    //     // console.log(image)
+    // }
 
     /**
      * 將時間顯示至lable

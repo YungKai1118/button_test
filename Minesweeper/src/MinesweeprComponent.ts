@@ -1,12 +1,13 @@
 class MinesweeperComponent extends eui.Component {
 
-    private image: eui.Image;
+    public image: eui.Image;
     public static ON_CLICK: string = "MinesweeperComponent.ON_CLICK";
+    public static MOUSE_OVER: string = "MinesweeperComponent.MOUSE_OVER";
     public row: number;
     public column: number;
     public componentIdex: number;
     public isTouch: boolean;
-    
+
 
     constructor() {
         super();
@@ -14,8 +15,10 @@ class MinesweeperComponent extends eui.Component {
         this.column = null;
         this.isTouch = false;
         this.addEventListener(egret.TouchEvent.TOUCH_END, this.returnTouch, this)
-        this.addEventListener("MouseEvent.mousedown",this.mouseDown,this)
-        
+        // this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.touchReleaseOutside, this)
+        // this.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.tocuhMove,this)
+        // this.addEventListener("MouseEvent.mousedown",this.mouseDown,this) //沒用
+
         /* 
         法二：先把每個component先完成eui讀取，再執行GameScene
         */
@@ -30,10 +33,13 @@ class MinesweeperComponent extends eui.Component {
     //     egret.log(this.image);
     // }
 
+    // private mouseDown():void{
+    //     console.log('aaa');
+    // }
+    // private touchReleaseOutside():void{
+    //    this.image.texture=RES.getRes("p9_png");
+    // }
 
-    private mouseDown():void{
-        console.log('aaa');
-    }
     public init(_row, _column, _index): void {
         this.image = this[`p9`];
         this.row = _row;
