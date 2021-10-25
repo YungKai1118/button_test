@@ -40,3 +40,10 @@
 2.參數型別、function型別寫清楚
 3.function註解
 4.function單一責任
+
+20211022/slotMachine
+	Q
+	1.內建的 component botton的程式碼藏在哪裡，怎麼可以執行按下的換圖功能
+	2.eui創的 eui.image , texture 是 null;  不能 用自己new的 變數給予 texture   (詳rollAxis.ts)
+	3.tweenLite 官方網站的資料查詢
+	

@@ -33,9 +33,6 @@ class GameScene extends eui.Component {
         }
 
         // 觸碰的圖示效果
-
-
-        // 
         //test ---------------------
         // this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.touchBegin, this)
         // this.addEventListener(egret.TouchEvent.TOUCH_END, this.touchEnd, this)
@@ -58,46 +55,98 @@ class GameScene extends eui.Component {
         // this.timer.start();
         // this.timer.stop();
 
-
-    }
-    private checkCollision(_stageX: number, _stageY: number, Mine: MinesweeperComponent): boolean {
-        let IsCollistion: boolean;
-        IsCollistion = Mine.hitTestPoint(_stageX, _stageY)
-        return IsCollistion;
-    }
-
-    // private touchBegin(e: egret.TouchEvent): void {
-    //     let image: eui.Image = e.target;
-    //     image.texture = RES.getRes("p0_png");
-    //     console.log("touchBegin")
-    // }
-
-    private touchMove(e: egret.TouchEvent): void {
-        // egret.BitmapData
-        let _p0: egret.Texture = RES.getRes("p0_png");
-        let _p9: egret.Texture = RES.getRes("p9_png");
-        let IsCollistion: boolean;
-        console.log("X="+e.stageX+"  Y="+e.stageY);
-        // image.texture = RES.getRes("p0_png");
-        for (let i = 0; i < this.GAME_ROW; i++) {
-            for (let t = 0; t < this.GAME_COLUMN; t++) {
-                if (!this.mine_list[i][t].isTouch) {
-                    IsCollistion = this.checkCollision(e.stageX, e.stageY, this.mine_list[i][t]);
-                    if (IsCollistion) {
-                        this.mine_list[i][t].image.texture = _p0;
-                    }
-                    else {
-                        this.mine_list[i][t].image.texture = _p9;
-                    }
-                }
-            }
+        window.addEventListener('mousedown', this.onMouseDown, false);
+        // 关闭网页的右键事件
+        document.oncontextmenu = function () {
+            return false;
         }
 
-        // if (!image.hitTestPoint(e.stageX, e.stageY)) {
-        //     image.texture = RES.getRes("p9_png");
+
+    }
+    //日後研究學習
+    private onMouseDown(event) {
+        if (event.button == 0) {
+
+            console.log("鼠标左键!")
+
+        } else if (event.button == 2) {
+
+            console.log("鼠标右键!");
+
+        }
+    }
+
+
+    // private checkCollision(_stageX: number, _stageY: number, Mine: MinesweeperComponent): boolean {
+    //     let IsCollistion: boolean;
+    //     IsCollistion = Mine.hitTestPoint(_stageX, _stageY)
+    //     return IsCollistion;
+    // }
+    /**
+     * 滑鼠 mousedown以後移動，產生點擊換圖效果，使用碰撞方式判斷每個componnent是否被被點住
+     */
+    private touchMove(e: egret.TouchEvent): void {
+
+        let component: MinesweeperComponent = e.target.parent;
+
+        //不是元件略過
+        if (component instanceof MinesweeperComponent == false) {
+            return;
+        }
+
+        //遍尋全世界component
+        for (let i = 0; i < this.GAME_ROW; i++) {
+            for (let t = 0; t < this.GAME_COLUMN; t++) {
+                let target: MinesweeperComponent = this.mine_list[i][t];
+
+                //已開過略過
+                if (target.isTouch) {
+                    continue;
+                }
+                //是滑鼠壓到的over狀態
+                // 1
+                // let isOver: boolean = target == component;
+                //   target.setIsOver(isOver);
+
+                //2
+                if (target == component) {
+                    // target.setIsOver(true);
+                    target.showMineNumber(0);
+                }
+                //不是就還原一般狀態
+                else {
+                    // target.setIsOver(false);
+                    target.showMineNumber(9);
+                }
+                //3
+                // target.setIsOver(target == component);
+            }
+        }
+        return;
+
+        // let _p0: egret.Texture = RES.getRes("p0_png");
+        // let _p9: egret.Texture = RES.getRes("p9_png");
+        // let IsCollistion: boolean;
+        // console.log("X=" + e.stageX + "  Y=" + e.stageY);
+        // // image.texture = RES.getRes("p0_png");
+        // for (let i = 0; i < this.GAME_ROW; i++) {
+        //     for (let t = 0; t < this.GAME_COLUMN; t++) {
+        //         if (!this.mine_list[i][t].isTouch) {
+        //             IsCollistion = this.checkCollision(e.stageX, e.stageY, this.mine_list[i][t]);
+        //             let p:egret.Point = this.localToGlobal(this.mine_list[i][t].x, this.mine_list[i][t].y);
+        //             let p2:egret.Point = this.globalToLocal(e.stageX, e.stageY);
+        //             if (IsCollistion) {
+        //                 this.mine_list[i][t].image.texture = _p0;
+        //             }
+        //             else {
+        //                 this.mine_list[i][t].image.texture = _p9;
+        //             }
+        //         }
+        //     }
         // }
+
         // console.log(image.hitTestPoint(e.stageX, e.stageY))
-        console.log("touchMove")
+        // console.log("touchMove")
         // console.log(document.onmousedown)
         // console.log(e.touchDown)
         // console.log(onmousedown)

@@ -2,7 +2,6 @@ class MinesweeperComponent extends eui.Component {
 
     public image: eui.Image;
     public static ON_CLICK: string = "MinesweeperComponent.ON_CLICK";
-    public static MOUSE_OVER: string = "MinesweeperComponent.MOUSE_OVER";
     public row: number;
     public column: number;
     public componentIdex: number;
@@ -15,6 +14,8 @@ class MinesweeperComponent extends eui.Component {
         this.column = null;
         this.isTouch = false;
         this.addEventListener(egret.TouchEvent.TOUCH_END, this.returnTouch, this)
+
+        // this.image.mask = this['ttt'];
         // this.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.touchReleaseOutside, this)
         // this.addEventListener(egret.TouchEvent.TOUCH_MOVE,this.tocuhMove,this)
         // this.addEventListener("MouseEvent.mousedown",this.mouseDown,this) //沒用
@@ -45,6 +46,10 @@ class MinesweeperComponent extends eui.Component {
         this.row = _row;
         this.column = _column;
         this.componentIdex = _index;
+    }
+
+    public setIsOver(v: boolean): void {
+        this.image.texture = v ? RES.getRes("p0_png") : RES.getRes("p9_png");
     }
 
     private returnTouch(e: egret.TouchEvent) {
@@ -80,6 +85,9 @@ class MinesweeperComponent extends eui.Component {
                 break;
             case 8:
                 this.image.texture = RES.getRes("p8_png");
+                break;
+            case 9:
+                this.image.texture = RES.getRes("p9_png");
                 break;
             case 11:
                 this.image.texture = RES.getRes("p11_png");

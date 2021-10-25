@@ -16,7 +16,7 @@ class GameScene extends eui.Component {
 	public constructor() {
 		super();
 
-		this.once(eui.UIEvent.COMPLETE, this.uiComplete, this);pr
+		this.once(eui.UIEvent.COMPLETE, this.uiComplete, this);
 	}
 
 	private uiComplete(e: eui.UIEvent): void {
