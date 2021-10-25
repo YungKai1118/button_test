@@ -8,8 +8,8 @@ class RollAxis extends eui.Component {
     private image_list: eui.Image[];//所有圖片資源
     private numberOfImages: number = 5;
 
-    private totalRollTimes: number = 1;
-    private RollSpeed: number = 0.8;
+    private totalRollTimes: number = 15;//轉動次數，數字越大轉動越久
+    private RollSpeed: number = 0.6;//轉動初始速度，數字越小越快
 
     private timer: egret.Timer;
     private LastImageNumber: number;
@@ -31,47 +31,43 @@ class RollAxis extends eui.Component {
         this.p0_FirstY = this.p0.y;
         this.p1_FirstY = this.p1.y;
         this.p2_FirstY = this.p2.y;
-
-        // const timer: egret.Timer = new egret.Timer(1000, 10);
-        // timer.addEventListener(egret.TimerEvent.TIMER_COMPLETE, this.tweenLiteMove, this);
     }
-
 
     /**
      * 每次點擊開始按鈕後初始化參數
      */
-    private Speed: number;
+    private Speed_temp: number;
     private IsFirstRoll: boolean;
     private countRollTimes: number;
     public init(_n) { //獲取中獎圖片編號
         this.LastImageNumber = _n;
-        this.Speed = this.RollSpeed;
+        this.Speed_temp = this.RollSpeed;
         this.IsFirstRoll = true;
         this.countRollTimes = 0;
     }
 
     public RollAxis(): void {
         //twennLite 動圖
-        if (this.IsFirstRoll) {  //第二次開始執行遊戲的圖片起點位置為前次結束位置，所以不先動圖，先把第一張圖片換掉
-            TweenLite.to(this.p0, 0.1, { alpha: 1, onComplete: this.randomeP, onCompleteScope: this });
+        if (this.IsFirstRoll) {  //第二次開始執行遊戲的圖片起點位置為前次結束位置，不先動圖，先把第一張圖片換掉
+            this.IsFirstRoll = false;
+            // this.randomeP();
+            TweenLite.to(this, 0.1, { onComplete: this.randomeP, onCompleteScope: this }); //執行完else面的存圖，才可以呼叫randomeP
         }
         else {
-            TweenLite.to(this.p0, this.Speed, { y: this.p0.y + this.height / 4 * 2, ease: Linear.easeNone });
-            TweenLite.to(this.p1, this.Speed, { y: this.p1.y + this.height / 4 * 2, ease: Linear.easeNone });
-            TweenLite.to(this.p2, this.Speed, { y: this.p2.y + this.height / 4 * 2, ease: Linear.easeNone });
-            TweenLite.to(this.p0, this.Speed, { alpha: 1, onComplete: this.randomeP, onCompleteScope: this });
+            TweenLite.to(this.p0, this.Speed_temp, { y: this.p0.y + this.height / 4 * 2, ease: Linear.easeNone });
+            TweenLite.to(this.p1, this.Speed_temp, { y: this.p1.y + this.height / 4 * 2, ease: Linear.easeNone });
+            TweenLite.to(this.p2, this.Speed_temp, { y: this.p2.y + this.height / 4 * 2, ease: Linear.easeNone });
+            TweenLite.to(this.p0, this.Speed_temp, { alpha: 1, onComplete: this.randomeP, onCompleteScope: this });
             //轉動次數計次
             this.countRollTimes++;
         }
-        this.IsFirstRoll = false;
         this.temp_p0 = this.p0.texture;
-
         //控制轉動速度
-        if (this.countRollTimes <= Math.floor(this.totalRollTimes / 4) && this.Speed > 0) {
-            this.Speed -= 0.08;
+        if (this.countRollTimes <= Math.floor(this.totalRollTimes / 4) && this.Speed_temp > 0) {
+            this.Speed_temp -= 0.08;
         }
         else if (this.countRollTimes >= this.totalRollTimes - Math.floor(this.totalRollTimes / 4)) {
-            this.Speed += 0.08;
+            this.Speed_temp += 0.08;
         }
     }
 
@@ -106,12 +102,12 @@ class RollAxis extends eui.Component {
     private RollEnd(): void {
         // this.endImageNumber=4;  
         this.p0.texture = RES.getRes(`p${this.LastImageNumber}_png`);
-        TweenLite.to(this.p0, 2, { y: this.p0.y + this.height / 4 * 2, ease: Circ });
-        TweenLite.to(this.p1, 2, { y: this.p1.y + this.height / 4 * 2, ease: Circ });
-        TweenLite.to(this.p2, 2, { y: this.p2.y + this.height / 4 * 2, ease: Circ });
+        TweenLite.to(this.p0, 1.3, { y: this.p0.y + this.height / 4 * 2, ease: Circ });
+        TweenLite.to(this.p1, 1.3, { y: this.p1.y + this.height / 4 * 2, ease: Circ });
+        TweenLite.to(this.p2, 1.3, { y: this.p2.y + this.height / 4 * 2, ease: Circ });
 
-        TweenLite.to(this.p0, 2.1, { alpha: 1, onComplete: this.ON_COMPLETE, onCompleteScope: this });
-        this.Speed = this.RollSpeed;
+        TweenLite.to(this.p0, 1.3 + 0.1, { alpha: 1, onComplete: this.ON_COMPLETE, onCompleteScope: this });
+        this.Speed_temp = this.RollSpeed;
     }
 
     private ON_COMPLETE(): void {

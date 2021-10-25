@@ -1,9 +1,9 @@
 class StartButton extends eui.Component {
 
     private onClick: boolean;
-    public static ROLL_START: string = "StartButton.ROLL_START";
+    public static CLICK_COMPLETE: string = "CLICK_COMPLETE";
     private button: eui.Image;
-    private IsRollComplete:boolean;
+    private IsRollComplete: boolean;
 
     public constructor() {
         super();
@@ -32,7 +32,7 @@ class StartButton extends eui.Component {
                 this.onClick = true;
                 this.button.texture = RES.getRes('button1_png')
                 this.button.alpha = 1;
-                this.dispatchEventWith(StartButton.ROLL_START, true, null);
+                this.dispatchEventWith(StartButton.CLICK_COMPLETE, true, null);
                 this.removeEventListener(egret.TouchEvent.TOUCH_END, this.touchHandler, this)
                 break;
         }
