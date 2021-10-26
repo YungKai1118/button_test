@@ -3,18 +3,19 @@ class RollAxis extends eui.Component {
     private p0: eui.Image; p0_FirstY: number;  //第一張圖片; 第一章圖片位置
     private p1: eui.Image; p1_FirstY: number;
     private p2: eui.Image; p2_FirstY: number;
+    private images: eui.Group; images_FirstY: number;
     private temp_p0: any;//佔存圖片，供換圖使用
 
-    private image_list: eui.Image[];//所有圖片資源
+    private image_list: egret.Texture[];//所有圖片資源
     private numberOfImages: number = 5;
 
-    private totalRollTimes: number = 15;//轉動次數，數字越大轉動越久
-    private RollSpeed: number = 0.6;//轉動初始速度，數字越小越快
+    private totalRollTimes: number = 18;//轉動次數，數字越大轉動越久
+    private rollSpeed: number = 0.65;//轉動初始速度，數字越小越快
 
     private timer: egret.Timer;
-    private LastImageNumber: number;
+    private lastImageNumber: number;
 
-    public static "ON_COMPLETE": string = "RollAxis.ON_COMPLETE"
+    public static COMPLETE: string = "RollAxis.COMPLETE"
 
     public constructor() {
         super();
@@ -26,91 +27,101 @@ class RollAxis extends eui.Component {
 
         this.image_list = [];
         for (let i = 0; i < this.numberOfImages; i++) {
-            this.image_list.push(RES.getRes(`p${i}_png`))
+            //method 1
+            this.image_list.push(<egret.Texture>RES.getRes(`p${i}_png`))
+            ////method 2
+            // this.image_list.push(RES.getRes(`p${i}_png`) as egret.Texture) 
         }
         this.p0_FirstY = this.p0.y;
         this.p1_FirstY = this.p1.y;
         this.p2_FirstY = this.p2.y;
+        this.images_FirstY = this.images.y;
     }
 
     /**
-     * 每次點擊開始按鈕後初始化參數
+     * 點擊開始按鈕後初始化參數
+     * 1.獲取最後一張圖片
+     * 2.動畫速度參數初始化
+     * 3.轉動次數初始化
      */
-    private Speed_temp: number;
-    private IsFirstRoll: boolean;
+    private tempSpeed: number;
     private countRollTimes: number;
-    public init(_n) { //獲取中獎圖片編號
-        this.LastImageNumber = _n;
-        this.Speed_temp = this.RollSpeed;
-        this.IsFirstRoll = true;
+    public init(imageNumber: number) { //獲取中獎圖片編號
+        this.lastImageNumber = imageNumber;
+        this.tempSpeed = this.rollSpeed;
         this.countRollTimes = 0;
     }
 
-    public RollAxis(): void {
-        //twennLite 動圖
-        if (this.IsFirstRoll) {  //第二次開始執行遊戲的圖片起點位置為前次結束位置，不先動圖，先把第一張圖片換掉
-            this.IsFirstRoll = false;
-            // this.randomeP();
-            TweenLite.to(this, 0.1, { onComplete: this.randomeP, onCompleteScope: this }); //執行完else面的存圖，才可以呼叫randomeP
-        }
-        else {
-            TweenLite.to(this.p0, this.Speed_temp, { y: this.p0.y + this.height / 4 * 2, ease: Linear.easeNone });
-            TweenLite.to(this.p1, this.Speed_temp, { y: this.p1.y + this.height / 4 * 2, ease: Linear.easeNone });
-            TweenLite.to(this.p2, this.Speed_temp, { y: this.p2.y + this.height / 4 * 2, ease: Linear.easeNone });
-            TweenLite.to(this.p0, this.Speed_temp, { alpha: 1, onComplete: this.randomeP, onCompleteScope: this });
-            //轉動次數計次
-            this.countRollTimes++;
-        }
+    /**
+     * 旋轉範例 (這個程式用不到，留存學習)
+     */
+    // public RollAxis(): void {
+    //     TweenLite.to(this.p2, 3, { rotation: 360, ease: Linear.easeNone });
+    // }
+
+
+    public rollAxis(): void {
+        // twennLite 動圖
+        ////method 1 :每個物件都動  (後面程式碼已刪除，無法使用，留存學習)
+        // TweenLite.to(this.p0, this.Speed_temp, { y: this.p0.y + this.height / 4 * 2, ease: Linear.easeNone });
+        // TweenLite.to(this.p1, this.Speed_temp, { y: this.p1.y + this.height / 4 * 2, ease: Linear.easeNone });
+        // TweenLite.to(this.p2, this.Speed_temp, { y: this.p2.y + this.height / 4 * 2, ease: Linear.easeNone });
+        // TweenLite.to(this.images, this.Speed_temp, { alpha: 1, onComplete: this.randomeP, onCompleteScope: this });
+        ////method 2 :使用群組動
+        TweenLite.to(this.images, this.tempSpeed, { y: this.images.y + this.images.height / 3 * 2, ease: Linear.easeNone, onComplete: this.randomeP, onCompleteScope: this });
+
+        //轉動次數計次
+        this.countRollTimes++;
         this.temp_p0 = this.p0.texture;
         //控制轉動速度
-        if (this.countRollTimes <= Math.floor(this.totalRollTimes / 4) && this.Speed_temp > 0) {
-            this.Speed_temp -= 0.08;
+        if (this.countRollTimes <= Math.floor(this.totalRollTimes / 4) && this.tempSpeed > 0) {
+            this.tempSpeed -= 0.08;
         }
         else if (this.countRollTimes >= this.totalRollTimes - Math.floor(this.totalRollTimes / 4)) {
-            this.Speed_temp += 0.08;
+            this.tempSpeed += 0.08;
         }
     }
 
-    public randomeP(): void {  //Q? 這裡用前面的function回傳值會爆掉
-        // this.p0.texture = this.image_list[0].texture;  //Q? 不可以? 
-        this.p0.texture = RES.getRes(`p${Math.floor(Math.random() * 4)}_png`);
-        this.p1.texture = RES.getRes(`p${Math.floor(Math.random() * 4)}_png`);
+    private randomeP(): void {  //Q? 這裡用前面的function回傳值會爆掉
+        //method 1 :由先行儲存資料列讀取
+        this.p0.texture = this.image_list[Math.floor(Math.random() * 4)];
+        this.p1.texture = this.image_list[Math.floor(Math.random() * 4)];
+        ////method 2 :由資料庫讀取
+        // this.p0.texture = RES.getRes(`p${Math.floor(Math.random() * 4)}_png`);
+        // this.p1.texture = RES.getRes(`p${Math.floor(Math.random() * 4)}_png`);
+
+        //第二次轉動圖片接續使用
         this.p2.texture = this.temp_p0;
-        this.p0.y = this.p0_FirstY;
-        this.p1.y = this.p1_FirstY;
-        this.p2.y = this.p2_FirstY;
+
+        //第二次轉動回復圖片原始位置
+        this.images.y = this.images_FirstY;
+
+        //判斷轉動是否應該結束
         if (this.countRollTimes == this.totalRollTimes) {
-            this.RollEnd();
+            this.rollEnd();
         }
         else {
-            this.RollAxis();
+            this.rollAxis();
         }
-
-        /**
-         * 學習測試code
-         */
-        // this.tweenLiteMove();
-        // egret.Tween.get(this.p0, { loop: true })
-        //     .to({ y: this.p0.y + this.height / 4 * 2  }, 2000)
-        //     .call(this.tweenLiteMove).wait(2000)  //????不知道怎麼用
-
-        // this.image_list[0]=this.p0;
-        // this.p2=this.image_list[0];   //Q 為什麼不能這樣改p2的圖?????  是call by reference? 
-
     }
 
-    private RollEnd(): void {
-        // this.endImageNumber=4;  
-        this.p0.texture = RES.getRes(`p${this.LastImageNumber}_png`);
-        TweenLite.to(this.p0, 1.3, { y: this.p0.y + this.height / 4 * 2, ease: Circ });
-        TweenLite.to(this.p1, 1.3, { y: this.p1.y + this.height / 4 * 2, ease: Circ });
-        TweenLite.to(this.p2, 1.3, { y: this.p2.y + this.height / 4 * 2, ease: Circ });
-
-        TweenLite.to(this.p0, 1.3 + 0.1, { alpha: 1, onComplete: this.ON_COMPLETE, onCompleteScope: this });
-        this.Speed_temp = this.RollSpeed;
+    private rollEnd(): void {
+        //最後一張圖片
+        this.p0.texture = RES.getRes(`p${this.lastImageNumber}_png`);
+        //最後一次移動動畫
+        TweenLite.to(this.images, 1, { y: this.images.y + this.images.height / 3 * 2, ease: Linear.easeNone, onComplete: this.rollComplete, onCompleteScope: this });
+        //初始化第一張圖片
+        this.temp_p0 = this.p0.texture;
+        //初始化初始速度，供下次轉動使用
+        this.tempSpeed = this.rollSpeed;
     }
 
-    private ON_COMPLETE(): void {
-        this.dispatchEventWith(RollAxis.ON_COMPLETE, true, true);
+    private rollComplete(v1: number, v2: number): void {
+        //轉動動畫結束事件發佈
+        this.dispatchEventWith(RollAxis.COMPLETE, true, true);
+        //初始化第一張圖片
+        this.p2.texture = this.temp_p0;
+        //初始化圖片位置至最初狀態
+        this.images.y = this.images_FirstY;
     }
 }

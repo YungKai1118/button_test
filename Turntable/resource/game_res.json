@@ -1,0 +1,23 @@
+{
+	"groups":[{
+			"keys":"button_png,arrow_png,M1_png",
+			"name":"preload"
+		}],
+	"resources":[
+		{
+			"name":"button_png",
+			"type":"image",
+			"url":"button.png"
+		},
+		{
+			"name":"arrow_png",
+			"type":"image",
+			"url":"arrow.png"
+		},
+		{
+			"name":"M1_png",
+			"type":"image",
+			"url":"M1.png"
+		}
+	]
+}

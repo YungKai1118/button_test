@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="TurntableSkin" width="484" height="484" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="turntableImage" source="M1_png" x="241.85" y="241.85" scaleX="0.7" scaleY="0.7" anchorOffsetX="345.5" anchorOffsetY="345.5"/>
+</e:Skin>
