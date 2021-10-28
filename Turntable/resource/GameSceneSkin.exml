@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="GameSceneSkin" width="484" height="666" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+<e:Skin class="GameSceneSkin" width="515" height="666" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*">
+	<ns1:Turntalbe id="turntable" width="484" height="484" x="0" y="0" skinName="TurntableSkin" alpha="1" locked="true"/>
+	<ns1:StartButton id="startButton" width="95" height="95" x="194.5" y="194.5" skinName="StartButtonSkin" locked="true"/>
+	<ns1:BetArea id="betArea" width="420" height="130" x="32" y="536" skinName="BetAreaSkin" anchorOffsetX="0" anchorOffsetY="0" locked="true"/>
+	<e:EditableText id="cheatLabel" width="100" height="29" text="" x="415" y="0" anchorOffsetY="0"/>
+	<e:Label id="moneyLable" text="10000" x="346.5" y="509" textColor="0xDBA54C" size="36" fontFamily="Microsoft YaHei" textAlign="center" verticalAlign="middle"/>
+	<e:Label id="warnLable" text="請下注" x="37" y="515" fontFamily="Microsoft YaHei" textColor="0x1c1c1c"/>
+	<e:Image source="arrow_png" x="427" y="223.25" scaleX="0.5" scaleY="0.5" locked="true"/>
 </e:Skin>

@@ -10,9 +10,12 @@ var game_file_list = [
 	"libs/modules/eui/eui.js",
 	"libs/modules/greensock/greensock.js",
 	"bin-debug/AssetAdapter.js",
+	"bin-debug/BetArea.js",
 	"bin-debug/GameScene.js",
 	"bin-debug/Main.js",
+	"bin-debug/StartButton.js",
 	"bin-debug/ThemeAdapter.js",
+	"bin-debug/Turntable.js",
 	//----auto game_file_list end----
 ];
 

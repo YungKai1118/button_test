@@ -1,13 +1,13 @@
 {
-    "autoGenerateExmlsList": true,
-    "exmls": [
-        "resource/eui_skins/ButtonSkin.exml",
-        "resource/eui_skins/RollAxisSkin.exml",
-        "resource/eui_skins/StartButtonSkin.exml",
-        "resource/eui_skins/TextInputSkin.exml",
-        "resource/GameSceneSkin.exml"
-    ],
-    "skins": {
-        "componet_test": "resource/eui_skins/componet_test.exml"
-    }
+  "autoGenerateExmlsList": true,
+  "exmls": [
+    "resource/eui_skins/BetAreaSkin.exml",
+    "resource/eui_skins/StartButtonSkin.exml",
+    "resource/eui_skins/TextInputSkin.exml",
+    "resource/eui_skins/TurntableSkin.exml",
+    "resource/GameSceneSkin.exml"
+  ],
+  "skins": {
+    "componet_test": "resource/eui_skins/componet_test.exml"
+  }
 }

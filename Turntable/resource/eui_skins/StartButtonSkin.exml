@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="StartButtonSkin" width="83" height="83" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="button" source="button1_png" x="0" y="0" scaleX="0.2" scaleY="0.2"/>
+<e:Skin class="StartButtonSkin" width="94" height="94" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image id="buttonDown" source="buttonDown_png" x="0" bottom="0"/>
+	<e:Image id="buttonUp" source="buttonUp_png" x="0" y="0" scaleX="1" scaleY="1" alpha="1"/>
 </e:Skin>

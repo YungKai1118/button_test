@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="BetAreaSkin" width="420" height="130" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect id="rect_0" width="60" height="60" x="0" y="70" anchorOffsetX="0" anchorOffsetY="0" fillColor="0x5B9BD5" scaleX="1" scaleY="1"/>
+	<e:Rect id="rect_1" width="60" height="60" x="60" y="70" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" fillColor="0xED7D31"/>
+	<e:Rect id="rect_2" width="60" height="60" x="120" y="70" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" fillColor="0xA5A5A5"/>
+	<e:Rect id="rect_3" width="60" height="60" x="180" y="70" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" fillColor="0xFFC000"/>
+	<e:Rect id="rect_4" width="60" height="60" x="240" y="70" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" fillColor="0x4472C4"/>
+	<e:Rect id="rect_5" width="60" height="60" x="300" y="70" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" fillColor="0x70AD47"/>
+	<e:Rect id="rect_6" width="60" height="60" x="360" y="70" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" fillColor="0x255E91"/>
+	<e:Label id="text_0" text="1" x="0" y="70" anchorOffsetX="0" width="60" textColor="0x000000" scaleX="1" scaleY="1" textAlign="center" bold="true" height="60" verticalAlign="middle"/>
+	<e:Label id="text_1" text="2" x="60" y="70" anchorOffsetX="0" width="60" textColor="0x000000" scaleX="1" scaleY="1" textAlign="center" bold="true" height="60" verticalAlign="middle"/>
+	<e:Label id="text_2" text="3" x="120" y="70" anchorOffsetX="0" width="60" textColor="0x000000" scaleX="1" scaleY="1" textAlign="center" bold="true" height="60" verticalAlign="middle"/>
+	<e:Label id="text_3" text="4" x="180" y="70" anchorOffsetX="0" width="60" textColor="0x000000" scaleX="1" scaleY="1" textAlign="center" bold="true" height="60" verticalAlign="middle"/>
+	<e:Label id="text_4" text="5" x="240" y="70" anchorOffsetX="0" width="60" textColor="0x000000" scaleX="1" scaleY="1" textAlign="center" bold="true" height="60" verticalAlign="middle"/>
+	<e:Label id="text_5" text="6" x="300" y="70" anchorOffsetX="0" width="60" textColor="0x000000" scaleX="1" scaleY="1" textAlign="center" bold="true" height="60" verticalAlign="middle"/>
+	<e:Label id="text_6" text="7" x="360" y="70" anchorOffsetX="0" width="60" textColor="0x000000" scaleX="1" scaleY="1" textAlign="center" bold="true" height="60" verticalAlign="middle"/>
+	<e:Image id="betCoin" source="coin_png" x="210" y="40" width="50" height="50" scaleX="1" scaleY="1" anchorOffsetX="25" anchorOffsetY="25"/>
+</e:Skin>

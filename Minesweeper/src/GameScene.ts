@@ -110,13 +110,13 @@ class GameScene extends eui.Component {
 
                 //2
                 if (target == component) {
-                    // target.setIsOver(true);
-                    target.showMineNumber(0);
+                    target.setIsOver(true);
+                    // target.showMineNumber(0);
                 }
                 //不是就還原一般狀態
                 else {
-                    // target.setIsOver(false);
-                    target.showMineNumber(9);
+                    target.setIsOver(false);
+                    // target.showMineNumber(9);
                 }
                 //3
                 // target.setIsOver(target == component);

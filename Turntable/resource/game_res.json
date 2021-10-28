@@ -1,14 +1,9 @@
 {
 	"groups":[{
-			"keys":"button_png,arrow_png,M1_png",
+			"keys":"arrow_png,M1_png,buttonDown_png,buttonUp_png,coin_png",
 			"name":"preload"
 		}],
 	"resources":[
-		{
-			"name":"button_png",
-			"type":"image",
-			"url":"button.png"
-		},
 		{
 			"name":"arrow_png",
 			"type":"image",
@@ -18,6 +13,21 @@
 			"name":"M1_png",
 			"type":"image",
 			"url":"M1.png"
+		},
+		{
+			"name":"buttonDown_png",
+			"type":"image",
+			"url":"buttonDown.png"
+		},
+		{
+			"name":"buttonUp_png",
+			"type":"image",
+			"url":"buttonUp.png"
+		},
+		{
+			"name":"coin_png",
+			"type":"image",
+			"url":"coin.png"
 		}
 	]
 }
