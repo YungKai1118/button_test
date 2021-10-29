@@ -21,34 +21,49 @@ class BetArea extends eui.Component {
         super();
         this.once(eui.UIEvent.COMPLETE, this.uiComplete, this)
     }
+
     /**
-     * 
+     * 下注幣加入滑鼠監聽事件
      */
     private uiComplete(e: eui.UIEvent): void {
-        this.betCoin.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.betCoinTouchHandler, this);
-
-        //Q 這個監聽器沒作用?
-        this.addEventListener(Turntalbe.ON_COMPLETE, this.coinInit, this);
-
+        egret.log("betAreaComplete");
+        this.init();
         //下注幣初始位置
         this.coinFirstX = this.betCoin.x;
         this.coinFirstY = this.betCoin.y;
+
+        //Q 這個監聽器為什麼沒作用?
+        this.addEventListener(Turntalbe.ON_COMPLETE, this.test, this); //想要監聽轉盤結束
     }
+
+    public init(): void {
+        this.betCoin.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.betCoinTouchHandler, this);
+        TweenLite.to(this.betCoin, 0.2, { x: this.coinFirstX, y: this.coinFirstY, ease: Power1.easeInOut })
+
+    }
+
+    private test(): void {
+        egret.log("test test test test")
+    }
+    
+    public betArearemoveEventListener(): void {
+        this.betCoin.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.betCoinTouchHandler, this);
+    }
+
     /**
-     * 下注幣的滑鼠事件
-     * 控制下注幣的狀況，並且展示
+     * 下注幣的滑鼠狀態控制事件
      */
     private checkCollisionResult: number[] = [];
     private tempRect: eui.Rect;
     private betCoinTouchHandler(evt: egret.TouchEvent): void {
-        
+
         switch (evt.type) {
             case egret.TouchEvent.TOUCH_BEGIN:
-                //set distance between tmouse's coordinate and coin's coordinate
                 this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.betCoinTouchHandler, this)
                 this.betCoin.addEventListener(egret.TouchEvent.TOUCH_END, this.betCoinTouchHandler, this)
                 this.xDistance = evt.stageX - this.betCoin.x;
                 this.yDistance = evt.stageY - this.betCoin.y;
+
                 break;
 
             case egret.TouchEvent.TOUCH_MOVE:
@@ -70,8 +85,7 @@ class BetArea extends eui.Component {
                 this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.betCoinTouchHandler, this)
                 this.betCoin.removeEventListener(egret.TouchEvent.TOUCH_END, this.betCoinTouchHandler, this)
 
-
-                egret.log("CollisionResult    " + this.checkCollisionResult.indexOf(1));
+                egret.log("userBetNumber = " + (this.checkCollisionResult.indexOf(1) + 1));
                 //獲得使用者下注號碼，若沒有下注為-1
                 this.userBetNumber = this.checkCollisionResult.indexOf(1);
                 //滑鼠點擊結束展示硬幣緩動
@@ -87,19 +101,13 @@ class BetArea extends eui.Component {
                 break;
         }
     }
-    /**
-     * 硬幣回到最初位置
-     */
-    public coinInit(): void {
-        TweenLite.to(this.betCoin, 0.2, { x: this.coinFirstX, y: this.coinFirstY, ease: Power1.easeInOut })
-    }
 
     /**
      * 碰撞檢測，碰撞回傳 1 ，沒碰撞回傳0 
      */
     private checkCollision(rect: eui.Rect, coinX: number, coinY: number): number {
         let isCollision: boolean = rect.hitTestPoint(coinX, coinY, false);
-        isCollision ? rect.alpha = 0.5 : rect.alpha = 1
+        isCollision ? rect.alpha = 0.4 : rect.alpha = 1
         let result: number;
         isCollision ? result = 1 : result = 0
         return result

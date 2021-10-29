@@ -12,7 +12,7 @@ class StartButton extends eui.Component {
     }
 
     private uiComplete(evt: eui.UIEvent): void {
-        egret.log("startButtonCom")
+        egret.log("startButtonComplete")
     }
 
     private touchHandler(evt: egret.TouchEvent): void {

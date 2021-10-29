@@ -14,6 +14,7 @@ class GameScene extends eui.Component {
     }
 
     private uiComplete(e: eui.UIEvent): void {
+        egret.log("gamesceneComplete");
         this.init();
     }
     /**
@@ -21,7 +22,7 @@ class GameScene extends eui.Component {
      */
     private init(): void {
         //監聽下注是否完成
-        this.addEventListener(BetArea.BET_COMPLETE, this.betOnComplete, this, false, 2);
+        this.addEventListener(BetArea.BET_COMPLETE, this.betOnComplete, this);
         //更新下注資訊
         this.updateInfor(this.betArea.userBetNumber);
     }
@@ -30,9 +31,7 @@ class GameScene extends eui.Component {
      */
     private betOnComplete(evt: egret.Event): void {
         //監聽按鈕是否點及完畢
-        this.addEventListener(StartButton.CLICK_COMPLETE, this.launchTurn, this, false, 1);
-        //監聽轉盤是否轉動完成
-        this.addEventListener(Turntalbe.ON_COMPLETE, this.checkWin, this);
+        this.addEventListener(StartButton.CLICK_COMPLETE, this.launchTurn, this);
         //更新下注資訊
         this.updateInfor(this.betArea.userBetNumber);
     }
@@ -41,33 +40,42 @@ class GameScene extends eui.Component {
      * 啟動轉盤
      */
     private launchTurn(evt: egret.Event): void {
-        
+
         this.updateInfor(this.betArea.userBetNumber);
+        //若沒有下注不轉動
         if (this.betArea.userBetNumber == -1) {
             return;
         }
+        //監聽轉盤是否轉動完成
+        this.addEventListener(Turntalbe.ON_COMPLETE, this.checkWin, this);
         //移除按鈕監聽
         this.removeEventListener(StartButton.CLICK_COMPLETE, this.launchTurn, this);
+        //移除下注區間聽
+        this.removeEventListener(BetArea.BET_COMPLETE, this.betOnComplete, this);
         //每次玩遊戲扣10元
         this.moneyLable.text = `${parseInt(this.moneyLable.text) - 10}`;
-        //獲得最終轉盤結果
+        //隨機產生轉盤結果 或 作弊結果
         this.endNumber = this.randomWin(parseInt(this.cheatLabel.text));
         egret.log("end number = " + this.endNumber);
-        //告知turntalbe轉盤結果數字
+        //告知turntalbe轉盤結果
         this.turntable.init(this.endNumber);
         //轉盤開始轉動
         this.turntable.startTurn();
+        //移除按鈕監聽器
+        this.betArea.betArearemoveEventListener();
     }
+
     /**
      * 檢查是否中獎
      */
     private checkWin(): void {
+        this.removeEventListener(Turntalbe.ON_COMPLETE, this.checkWin, this);
         //中獎+100
         if (this.betArea.userBetNumber + 1 == this.endNumber) {
             this.moneyLable.text = `${parseInt(this.moneyLable.text) + 100}`;
         }
-        //下注區籌碼回到原點
-        // this.betArea.coinInit();
+        //下注區籌碼回到原點,以及掛回按鈕監聽器
+        this.betArea.init();
         //重新開始下注
         this.init();
     }
@@ -94,15 +102,11 @@ class GameScene extends eui.Component {
      * 更新提示訊息
      */
     private updateInfor(betNumber): void {
-        if (betNumber==-1){
+        if (betNumber == -1) {
             this.warnLable.text = '請下注';
         }
         else {
             this.warnLable.text = '';
         }
     }
-
-
-
-
 }
