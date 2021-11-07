@@ -32,15 +32,13 @@ class GameScene extends eui.Component {
     private betOnComplete(evt: egret.Event): void {
         //監聽按鈕是否點及完畢
         this.addEventListener(StartButton.CLICK_COMPLETE, this.launchTurn, this);
-        //更新下注資訊
-        this.updateInfor(this.betArea.userBetNumber);
     }
 
     /**
      * 啟動轉盤
      */
     private launchTurn(evt: egret.Event): void {
-
+        //更新下注資訊
         this.updateInfor(this.betArea.userBetNumber);
         //若沒有下注不轉動
         if (this.betArea.userBetNumber == -1) {
@@ -62,6 +60,7 @@ class GameScene extends eui.Component {
         //轉盤開始轉動
         this.turntable.startTurn();
         //移除按鈕監聽器
+        // this.betArea.enabled(false);
         this.betArea.betArearemoveEventListener();
     }
 
@@ -76,8 +75,11 @@ class GameScene extends eui.Component {
         }
         //下注區籌碼回到原點,以及掛回按鈕監聽器
         this.betArea.init();
+        // this.betArea.enabled(true);
         //重新開始下注
         this.init();
+        //更新下注資訊
+        this.updateInfor(this.betArea.userBetNumber);
     }
 
     /**

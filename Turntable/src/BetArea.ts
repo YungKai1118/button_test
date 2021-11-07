@@ -19,7 +19,7 @@ class BetArea extends eui.Component {
 
     public constructor() {
         super();
-        this.once(eui.UIEvent.COMPLETE, this.uiComplete, this)
+        this.once(eui.UIEvent.COMPLETE, this.uiComplete, this);
     }
 
     /**
@@ -37,15 +37,15 @@ class BetArea extends eui.Component {
     }
 
     public init(): void {
+        this.userBetNumber = -1;
         this.betCoin.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.betCoinTouchHandler, this);
-        TweenLite.to(this.betCoin, 0.2, { x: this.coinFirstX, y: this.coinFirstY, ease: Power1.easeInOut })
-
+        TweenLite.to(this.betCoin, 0.2, { x: this.coinFirstX, y: this.coinFirstY, ease: Power1.easeInOut });
     }
 
     private test(): void {
         egret.log("test test test test")
     }
-    
+
     public betArearemoveEventListener(): void {
         this.betCoin.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.betCoinTouchHandler, this);
     }
@@ -63,16 +63,17 @@ class BetArea extends eui.Component {
                 this.betCoin.addEventListener(egret.TouchEvent.TOUCH_END, this.betCoinTouchHandler, this)
                 this.xDistance = evt.stageX - this.betCoin.x;
                 this.yDistance = evt.stageY - this.betCoin.y;
-
                 break;
 
             case egret.TouchEvent.TOUCH_MOVE:
-                this.betCoin.x = evt.stageX - this.xDistance;
-                this.betCoin.y = evt.stageY - this.yDistance;
+                let pt: egret.Point = this.globalToLocal(evt.stageX, evt.stageY);
+                this.betCoin.x = pt.x;// - this.xDistance;
+                this.betCoin.y = pt.y;// - this.yDistance;
 
                 //// Q   ??
-                // let coinP: egret.Point = this.betCoin.localToGlobal(this.betCoin.x, this.betCoin.y);
-                // egret.log(coinP);
+                let coinStagePos: egret.Point = this.localToGlobal(this.betCoin.x, this.betCoin.y);
+                egret.log(coinStagePos);
+                egret.log(this.betCoin.x + this.x +"  "+this.betCoin.y + this.y);
 
                 //檢查每個rect(下注區)是否和硬幣中心點碰撞
                 for (let i = 0; i < this.numberOfBet; i++) {
@@ -96,7 +97,7 @@ class BetArea extends eui.Component {
                 else {//coin back to firsy position
                     TweenLite.to(this.betCoin, 0.5, { x: this.coinFirstX, y: this.coinFirstY, ease: Power1.easeInOut })
                 }
-                //發布滑鼠點擊結束事件
+                //發布按鈕點擊事件結束事件
                 this.dispatchEventWith(BetArea.BET_COMPLETE, true, null);
                 break;
         }

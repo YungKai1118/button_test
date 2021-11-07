@@ -1,7 +1,7 @@
 class Turntalbe extends eui.Component {
 
     private turntableImage: eui.Image
-    private totalRoundNumber: number = 2;//轉盤旋轉圈數(等速時，啟動和結束圈數不算在內)
+    private totalRoundNumber: number = 5;//轉盤旋轉圈數(等速時，啟動和結束圈數不算在內)
     private countRoundNumber: number = 0;
     private stopAngle: number;
     public numberOfCut: number = 7; //轉盤的分割個數，若需要換圖片增加轉盤個數，可變動此值，後續旋轉角度將自動計算。但圖片的0度右方必須為1，左方為最後一個數字
@@ -56,7 +56,7 @@ class Turntalbe extends eui.Component {
      */
     private endTurn(): void {
         let angle0 = 90 + 1;
-        TweenLite.to(this.turntableImage, 6, { rotation: 360 * 3 + angle0 + this.stopAngle, ease: Power1.easeOut, onComplete: this.onComplete, onCompleteScope: this })
+        TweenLite.to(this.turntableImage, 8, { rotation: 360 * 3 + angle0 + this.stopAngle, ease: Power1.easeOut, onComplete: this.onComplete, onCompleteScope: this })
     }
 
     /**

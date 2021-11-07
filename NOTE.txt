@@ -46,4 +46,21 @@
 	1.內建的 component botton的程式碼藏在哪裡，怎麼可以執行按下的換圖功能
 	2.eui創的 eui.image , texture 是 null;  不能 用自己new的 變數給予 texture   (詳rollAxis.ts)
 	3.tweenLite 官方網站的資料查詢
+
+
+20211027/Turtable
+	Q
+	1. loclToGlobal 轉出來的數字跟我想要的不一樣?
+	2. 為什麼egret 不能產生exe檔案供單機遊玩，還是這個是javascript的原生問題?
 	
+20211101-------------------------------
+封包(google protocol buffer)
+https://yami.io/protobuf/
+
+架構pureMVC(框架framework)
+https://iter01.com/592350.html
+				Facade(核心)
+[M]Model(Proxy)[V]View(Mediator)[C]Controller(Command)
+
+clean code
+設計模式
